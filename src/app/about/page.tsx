@@ -1,5 +1,6 @@
 // TODO: copy review — placeholder voice, swap with real story when ready
 
+import Image from "next/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
@@ -109,21 +110,15 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Photo band — TODO: replace with real about hero photo at /photos/about-band.jpg */}
-        <section
-          aria-hidden
-          className="relative w-full aspect-[16/9] sm:aspect-[21/9] bg-neutral-900 border-b border-bone/10"
-        >
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.04), transparent 70%)",
-            }}
+        {/* Photo band */}
+        <section className="relative w-full aspect-[16/9] sm:aspect-[21/9] bg-neutral-900 border-b border-bone/10 overflow-hidden">
+          <Image
+            src="/photos/praying-bibles.png"
+            alt="Students praying with Bibles outdoors at night"
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
           />
-          <span className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 text-[10px] uppercase tracking-widest text-smoke">
-            Photo / About Band
-          </span>
         </section>
 
         {/* Pillars: Fellowship / Outreach / Encouragement */}

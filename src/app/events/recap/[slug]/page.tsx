@@ -1,17 +1,20 @@
 // TODO: copy review — placeholder recap content, swap when real recaps drop
 
+import Image from "next/image";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 
+type Photo = { src: string; alt: string };
+
 type Recap = {
   title: string;
   when: string;
   intro: string;
   body: string[];
-  photoCount: number; // grid placeholder count
+  photos: Photo[];
 };
 
 const RECAPS: Record<string, Recap> = {
@@ -25,7 +28,12 @@ const RECAPS: Record<string, Recap> = {
       "The bonfire on Saturday night is the moment most of us are still talking about. Guitars, scripture passed around, hands raised against the dark — the whole thing felt like something out of Acts. Several students put their faith in Christ. Others recommitted. We came home different.",
       "Photos and video coming soon. If you missed it — we're already planning the next one.",
     ],
-    photoCount: 8,
+    photos: [
+      { src: "/photos/bonfire-night.png", alt: "Bonfire on the beach at night with the community" },
+      { src: "/photos/beach-pair-1.png", alt: "Two students at the beach" },
+      { src: "/photos/beach-pair-2.png", alt: "Two students at the beach" },
+      { src: "/photos/sunset-collage.png", alt: "Sunset hangout collage" },
+    ],
   },
   "evangelism-april": {
     title: "Evangelism — Downtown Orlando",
@@ -36,7 +44,10 @@ const RECAPS: Record<string, Recap> = {
       "Forty-something of us split into pairs and spread out across Lake Eola and Church Street. The plan: meet people, listen, ask good questions, share Jesus when the door opens.",
       "Some conversations were short. A few went over an hour. Two students prayed to receive Christ. We ended the night at a taco place comparing stories — what we'd been afraid of, what surprised us, where God showed up.",
     ],
-    photoCount: 6,
+    photos: [
+      { src: "/photos/praying-bibles.png", alt: "Students praying outdoors with Bibles" },
+      { src: "/photos/worship-outdoor.png", alt: "Worship gathering at night" },
+    ],
   },
 };
 
@@ -81,16 +92,23 @@ export default async function RecapDetailPage({
                   </p>
                 </Reveal>
 
-                {/* TODO: swap placeholder grid with real recap photos at /photos/recap/{slug}/ */}
                 <Reveal delay={240} className="mt-16 sm:mt-20">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
-                    {Array.from({ length: recap.photoCount }).map((_, i) => (
+                    {recap.photos.map((p, i) => (
                       <div
-                        key={i}
-                        className={`bg-ash ${
+                        key={p.src}
+                        className={`relative overflow-hidden bg-ash ${
                           i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"
                         }`}
-                      />
+                      >
+                        <Image
+                          src={p.src}
+                          alt={p.alt}
+                          fill
+                          sizes="(max-width: 768px) 50vw, 25vw"
+                          className="object-cover"
+                        />
+                      </div>
                     ))}
                   </div>
                 </Reveal>

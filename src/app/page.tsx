@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Button from "@/components/Button";
@@ -19,16 +20,16 @@ const EVENTS = [
   { day: "30", month: "MAY", title: "Spikeball Tourney", location: "Veterans Park" },
 ];
 
-// 8 photo placeholder slots with varying aspect ratios for the asymmetric grid
-const PHOTO_SLOTS = [
-  { span: "md:col-span-6 md:row-span-2", aspect: "aspect-[4/5]" },
-  { span: "md:col-span-3 md:row-span-1", aspect: "aspect-[4/3]" },
-  { span: "md:col-span-3 md:row-span-1", aspect: "aspect-[4/3]" },
-  { span: "md:col-span-3 md:row-span-1", aspect: "aspect-square" },
-  { span: "md:col-span-3 md:row-span-1", aspect: "aspect-square" },
-  { span: "md:col-span-4 md:row-span-1", aspect: "aspect-[4/3]" },
-  { span: "md:col-span-4 md:row-span-1", aspect: "aspect-[4/3]" },
-  { span: "md:col-span-4 md:row-span-1", aspect: "aspect-[4/3]" },
+// 8 community photos, asymmetric grid. Mix of group / worship / beach / study.
+const PHOTOS = [
+  { src: "/photos/bonfire-night.png", alt: "Beach bonfire at night with the community", span: "md:col-span-6 md:row-span-2", aspect: "aspect-[4/5]" },
+  { src: "/photos/beach-trip.png", alt: "Beach trip — surfboards and spikeball", span: "md:col-span-3 md:row-span-1", aspect: "aspect-[4/3]" },
+  { src: "/photos/ucf-night.png", alt: "UCF night collage", span: "md:col-span-3 md:row-span-1", aspect: "aspect-[4/3]" },
+  { src: "/photos/worship-guitar.png", alt: "Worship night with guitar", span: "md:col-span-3 md:row-span-1", aspect: "aspect-square" },
+  { src: "/photos/bible-study-1.png", alt: "Open Bibles during study", span: "md:col-span-3 md:row-span-1", aspect: "aspect-square" },
+  { src: "/photos/bible-study-house.png", alt: "Bible study at the Streetlights House", span: "md:col-span-4 md:row-span-1", aspect: "aspect-[4/3]" },
+  { src: "/photos/worship-outdoor.png", alt: "Outdoor worship at night", span: "md:col-span-4 md:row-span-1", aspect: "aspect-[4/3]" },
+  { src: "/photos/sunset-collage.png", alt: "Summer sunset hangout", span: "md:col-span-4 md:row-span-1", aspect: "aspect-[4/3]" },
 ];
 
 export default function Home() {
@@ -44,19 +45,23 @@ export default function Home() {
             the container at every width from 320px to 1920px+.
             ============================================================ */}
         <section className="relative min-h-screen w-full overflow-hidden flex items-center pt-24 sm:pt-28 pb-20 sm:pb-24">
-          {/* TODO: replace with hero photo via <Image fill priority src="..." /> */}
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-neutral-900"
-            style={{
-              backgroundImage:
-                "radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.06), transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(255,255,255,0.04), transparent 50%)",
-            }}
+          <Image
+            src="/photos/hero-speaking.png"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
           />
-          {/* Bottom-up gradient for headline legibility on real photo */}
+          {/* Dark wash so headline always reads */}
           <div
             aria-hidden
-            className="absolute inset-0 bg-gradient-to-t from-night via-night/70 to-night/30"
+            className="absolute inset-0 bg-night/60"
+          />
+          {/* Bottom-up gradient for headline legibility */}
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-t from-night via-night/70 to-night/20"
           />
 
           <div className="relative z-10 w-full mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
@@ -198,25 +203,20 @@ export default function Home() {
               </a>
             </Reveal>
 
-            {/* TODO: replace each placeholder div with <Image> when real photos drop */}
             <Reveal delay={100}>
               <div className="grid grid-cols-2 md:grid-cols-12 auto-rows-[12rem] sm:auto-rows-[14rem] md:auto-rows-[16rem] gap-2 sm:gap-3">
-                {PHOTO_SLOTS.map((slot, i) => (
+                {PHOTOS.map((p) => (
                   <div
-                    key={i}
-                    className={`relative overflow-hidden bg-ash ${slot.span} ${slot.aspect} md:aspect-auto`}
+                    key={p.src}
+                    className={`relative overflow-hidden bg-ash ${p.span} ${p.aspect} md:aspect-auto`}
                   >
-                    <div
-                      aria-hidden
-                      className="absolute inset-0"
-                      style={{
-                        backgroundImage:
-                          "radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.04), transparent 60%)",
-                      }}
+                    <Image
+                      src={p.src}
+                      alt={p.alt}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 33vw"
+                      className="object-cover"
                     />
-                    <span className="absolute bottom-3 left-3 text-[10px] uppercase tracking-[0.32em] text-smoke">
-                      Photo / {String(i + 1).padStart(2, "0")}
-                    </span>
                   </div>
                 ))}
               </div>
