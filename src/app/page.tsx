@@ -1,65 +1,318 @@
-import Image from "next/image";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import Button from "@/components/Button";
+import SectionHeading from "@/components/SectionHeading";
+import EventRow from "@/components/EventRow";
+import Reveal from "@/components/Reveal";
+
+// TODO: replace with real GroupMe invite URL
+const GROUPME_URL = "https://groupme.com/join_group/107504026/haDaHAWT";
+const INSTAGRAM_URL = "https://instagram.com/streetlightscommunity";
+
+// TODO: replace placeholder events with real schedule
+const EVENTS = [
+  { day: "04", month: "MAY", title: "Grill Sesh", location: "Veterans Park" },
+  { day: "11", month: "MAY", title: "Sports Night", location: "Veterans Park" },
+  { day: "18", month: "MAY", title: "Bible Study", location: "Streetlights House" },
+  { day: "25", month: "MAY", title: "Worship Night", location: "Downtown Wintergarden" },
+  { day: "30", month: "MAY", title: "Spikeball Tourney", location: "Veterans Park" },
+];
+
+// 8 photo placeholder slots with varying aspect ratios for the asymmetric grid
+const PHOTO_SLOTS = [
+  { span: "md:col-span-6 md:row-span-2", aspect: "aspect-[4/5]" },
+  { span: "md:col-span-3 md:row-span-1", aspect: "aspect-[4/3]" },
+  { span: "md:col-span-3 md:row-span-1", aspect: "aspect-[4/3]" },
+  { span: "md:col-span-3 md:row-span-1", aspect: "aspect-square" },
+  { span: "md:col-span-3 md:row-span-1", aspect: "aspect-square" },
+  { span: "md:col-span-4 md:row-span-1", aspect: "aspect-[4/3]" },
+  { span: "md:col-span-4 md:row-span-1", aspect: "aspect-[4/3]" },
+  { span: "md:col-span-4 md:row-span-1", aspect: "aspect-[4/3]" },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <Nav />
+
+      <main id="top">
+        {/* ============================================================
+            HERO — exactly one viewport, vertically centered.
+            HEADLINE SCALE RULE (see SectionHeading.tsx for full notes):
+            sized to fit "EVERYDAY ENCOURAGEMENT." (longest line) inside
+            the container at every width from 320px to 1920px+.
+            ============================================================ */}
+        <section className="relative min-h-screen w-full overflow-hidden flex items-center pt-24 sm:pt-28 pb-20 sm:pb-24">
+          {/* TODO: replace with hero photo via <Image fill priority src="..." /> */}
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-neutral-900"
+            style={{
+              backgroundImage:
+                "radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.06), transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(255,255,255,0.04), transparent 50%)",
+            }}
+          />
+          {/* Bottom-up gradient for headline legibility on real photo */}
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-t from-night via-night/70 to-night/30"
+          />
+
+          <div className="relative z-10 w-full mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
+            {/* Location / time label — sits above the headline, in flow */}
+            <p className="text-xs sm:text-sm uppercase tracking-widest text-bone/60 mb-5 sm:mb-7">
+              Orlando, FL · Mondays at 6:45pm
+            </p>
+
+            <h1 className="font-display uppercase leading-[0.88] tracking-tight text-bone text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl">
+              <span className="block">Everyday Fellowship.</span>
+              <span className="block">Everyday Outreach.</span>
+              <span className="block">Everyday Encouragement.</span>
+            </h1>
+
+            <p className="mt-6 sm:mt-8 text-xs sm:text-sm uppercase tracking-widest text-smoke">
+              — Acts 2:42–47
+            </p>
+
+            <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <Button href="#whats-on" variant="filled">
+                Pull Up Monday
+              </Button>
+              <Button
+                href={GROUPME_URL}
+                variant="outline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Join the GroupMe
+              </Button>
+            </div>
+          </div>
+
+          {/* scroll indicator */}
+          <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-smoke">
+            <span className="text-[10px] uppercase tracking-widest">
+              Scroll
+            </span>
+            <span className="block h-10 w-px bg-bone/30" />
+          </div>
+        </section>
+
+        {/* ============================================================
+            WHO WE ARE
+            ============================================================ */}
+        <section
+          id="about"
+          className="relative border-t border-bone/10 py-24 sm:py-36 lg:py-48"
+        >
+          <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
+            <div className="grid grid-cols-12 gap-x-6 gap-y-12">
+              <Reveal className="col-span-12 lg:col-span-5">
+                <SectionHeading kicker="Who we are">
+                  A community,
+                  <br />
+                  not a service.
+                </SectionHeading>
+              </Reveal>
+
+              <Reveal
+                delay={120}
+                className="col-span-12 lg:col-span-6 lg:col-start-7 self-end"
+              >
+                <p className="text-2xl sm:text-3xl lg:text-4xl leading-[1.25] tracking-tight text-bone/90 font-light">
+                  StreetLights is a college community in Orlando — students
+                  showing up for each other every day of the week.
+                </p>
+                <p className="mt-8 text-lg sm:text-xl leading-[1.5] text-bone/70">
+                  Mondays we gather. The rest of the week we eat together,
+                  hoop together, study scripture together, and chase down the
+                  city. No stage personalities. No vibes economy. Just people.
+                </p>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================
+            WHAT'S ON — the schedule
+            ============================================================ */}
+        <section
+          id="whats-on"
+          className="relative border-t border-bone/10 py-24 sm:py-36 lg:py-48"
+        >
+          <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
+            <Reveal>
+              <SectionHeading kicker="What's on">This Month</SectionHeading>
+            </Reveal>
+
+            <Reveal delay={120} className="mt-16 sm:mt-24">
+              {/* Month / Year header — mirrors their IG schedule graphic */}
+              <div className="flex items-center gap-6 sm:gap-10 pb-6 sm:pb-8 border-b border-bone/30">
+                <span className="font-display text-3xl sm:text-5xl uppercase tracking-tight">
+                  May
+                </span>
+                <span className="flex-1 h-px bg-bone/30" />
+                <span className="font-display text-3xl sm:text-5xl uppercase tracking-tight">
+                  2026
+                </span>
+              </div>
+
+              <div>
+                {EVENTS.map((e) => (
+                  <EventRow
+                    key={`${e.day}-${e.title}`}
+                    day={e.day}
+                    month={e.month}
+                    title={e.title}
+                    location={e.location}
+                  />
+                ))}
+                {/* bottom divider */}
+                <div className="border-t border-bone/15" />
+              </div>
+
+              <p className="mt-10 text-sm uppercase tracking-[0.22em] text-smoke">
+                Monday events start at 6:45 — Veterans Park unless noted.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ============================================================
+            PHOTO GRID — asymmetric, photo-heavy
+            ============================================================ */}
+        <section className="relative border-t border-bone/10 py-24 sm:py-36">
+          <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
+            <Reveal className="mb-12 sm:mb-16 flex items-end justify-between gap-6">
+              <p className="text-xs sm:text-sm uppercase tracking-[0.32em] text-smoke">
+                The Community
+              </p>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs sm:text-sm uppercase tracking-[0.22em] text-bone/80 hover:text-bone transition-colors whitespace-nowrap"
+              >
+                @streetlightscommunity ↗
+              </a>
+            </Reveal>
+
+            {/* TODO: replace each placeholder div with <Image> when real photos drop */}
+            <Reveal delay={100}>
+              <div className="grid grid-cols-2 md:grid-cols-12 auto-rows-[12rem] sm:auto-rows-[14rem] md:auto-rows-[16rem] gap-2 sm:gap-3">
+                {PHOTO_SLOTS.map((slot, i) => (
+                  <div
+                    key={i}
+                    className={`relative overflow-hidden bg-ash ${slot.span} ${slot.aspect} md:aspect-auto`}
+                  >
+                    <div
+                      aria-hidden
+                      className="absolute inset-0"
+                      style={{
+                        backgroundImage:
+                          "radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.04), transparent 60%)",
+                      }}
+                    />
+                    <span className="absolute bottom-3 left-3 text-[10px] uppercase tracking-[0.32em] text-smoke">
+                      Photo / {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ============================================================
+            CONNECT — three plug-in points
+            ============================================================ */}
+        <section
+          id="connect"
+          className="relative border-t border-bone/10 py-24 sm:py-36 lg:py-48"
+        >
+          <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
+            <Reveal>
+              <SectionHeading kicker="Plug in">Connect</SectionHeading>
+            </Reveal>
+
+            <div className="mt-16 sm:mt-24 grid grid-cols-1 md:grid-cols-3 gap-px bg-bone/15">
+              {/* PULL UP */}
+              <Reveal className="bg-night p-8 sm:p-10 flex flex-col">
+                <p className="text-xs uppercase tracking-[0.32em] text-smoke">
+                  01 / Pull Up
+                </p>
+                <h3 className="mt-6 font-display text-4xl sm:text-5xl uppercase leading-none tracking-tight">
+                  Monday
+                  <br />
+                  6:45pm
+                </h3>
+                <p className="mt-6 text-base text-bone/80 leading-relaxed">
+                  Show up. Bring a friend. We meet weekly to gather, eat,
+                  worship, and figure out what it means to follow Jesus
+                  together.
+                </p>
+                <a
+                  href="#whats-on"
+                  className="mt-auto pt-8 text-sm uppercase tracking-[0.22em] text-bone/70 hover:text-bone transition-colors"
+                >
+                  Location varies — check What's On for this Monday's spot ↑
+                </a>
+              </Reveal>
+
+              {/* GROUPME */}
+              <Reveal delay={100} className="bg-night p-8 sm:p-10 flex flex-col">
+                <p className="text-xs uppercase tracking-[0.32em] text-smoke">
+                  02 / GroupMe
+                </p>
+                <h3 className="mt-6 font-display text-4xl sm:text-5xl uppercase leading-none tracking-tight">
+                  Where it
+                  <br />
+                  Happens
+                </h3>
+                <p className="mt-6 text-base text-bone/80 leading-relaxed">
+                  This is where everything happens. Hangouts, last-minute
+                  beach trips, prayer requests, who's bringing the grill —
+                  all of it.
+                </p>
+                <a
+                  href={GROUPME_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto pt-8 text-sm uppercase tracking-[0.22em] text-bone hover:text-bone/70 transition-colors"
+                >
+                  Join the GroupMe ↗
+                </a>
+              </Reveal>
+
+              {/* INSTAGRAM */}
+              <Reveal delay={200} className="bg-night p-8 sm:p-10 flex flex-col">
+                <p className="text-xs uppercase tracking-[0.32em] text-smoke">
+                  03 / Follow
+                </p>
+                <h3 className="mt-6 font-display text-4xl sm:text-5xl uppercase leading-none tracking-tight">
+                  See What
+                  <br />
+                  We're Up To
+                </h3>
+                <p className="mt-6 text-base text-bone/80 leading-relaxed">
+                  Schedule drops, retreat recaps, worship nights, the whole
+                  picture — posted weekly on Instagram.
+                </p>
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto pt-8 text-sm uppercase tracking-[0.22em] text-bone hover:text-bone/70 transition-colors"
+                >
+                  @streetlightscommunity ↗
+                </a>
+              </Reveal>
+            </div>
+          </div>
+        </section>
       </main>
-    </div>
+
+      <Footer />
+    </>
   );
 }
