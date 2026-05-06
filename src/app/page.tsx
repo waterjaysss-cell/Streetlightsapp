@@ -20,16 +20,16 @@ const EVENTS = [
   { day: "30", month: "MAY", title: "Spikeball Tourney", location: "Veterans Park" },
 ];
 
-// 8 community photos, asymmetric grid. Mix of group / worship / beach / study.
+// 8 community photos, uniform square grid. Alternates candid / collage for rhythm.
 const PHOTOS = [
-  { src: "/photos/bonfire-night.png", alt: "Beach bonfire at night with the community", span: "md:col-span-6 md:row-span-2", aspect: "aspect-[4/5]" },
-  { src: "/photos/beach-trip.png", alt: "Beach trip — surfboards and spikeball", span: "md:col-span-3 md:row-span-1", aspect: "aspect-[4/3]" },
-  { src: "/photos/ucf-night.png", alt: "UCF night collage", span: "md:col-span-3 md:row-span-1", aspect: "aspect-[4/3]" },
-  { src: "/photos/worship-guitar.png", alt: "Worship night with guitar", span: "md:col-span-3 md:row-span-1", aspect: "aspect-square" },
-  { src: "/photos/bible-study-1.png", alt: "Open Bibles during study", span: "md:col-span-3 md:row-span-1", aspect: "aspect-square" },
-  { src: "/photos/bible-study-house.png", alt: "Bible study at the Streetlights House", span: "md:col-span-4 md:row-span-1", aspect: "aspect-[4/3]" },
-  { src: "/photos/worship-outdoor.png", alt: "Outdoor worship at night", span: "md:col-span-4 md:row-span-1", aspect: "aspect-[4/3]" },
-  { src: "/photos/sunset-collage.png", alt: "Summer sunset hangout", span: "md:col-span-4 md:row-span-1", aspect: "aspect-[4/3]" },
+  { src: "/photos/bonfire-night.png", alt: "Beach bonfire at night with the community" },
+  { src: "/photos/beach-trip.png", alt: "Beach trip — surfboards and spikeball" },
+  { src: "/photos/bible-study-house.png", alt: "Bible study at the Streetlights House" },
+  { src: "/photos/ucf-night.png", alt: "UCF night collage" },
+  { src: "/photos/bible-study-1.png", alt: "Open Bibles during study" },
+  { src: "/photos/worship-guitar.png", alt: "Worship night with guitar" },
+  { src: "/photos/beach-pair-1.png", alt: "Two students at the beach" },
+  { src: "/photos/sunset-collage.png", alt: "Summer sunset hangout" },
 ];
 
 export default function Home() {
@@ -185,12 +185,12 @@ export default function Home() {
         </section>
 
         {/* ============================================================
-            PHOTO GRID — asymmetric, photo-heavy
+            PHOTO GRID — uniform square grid (2 / 3 / 4 cols)
             ============================================================ */}
-        <section className="relative border-t border-bone/10 py-24 sm:py-36">
+        <section className="relative pt-20 sm:pt-28 pb-24 sm:pb-36">
           <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
-            <Reveal className="mb-12 sm:mb-16 flex items-end justify-between gap-6">
-              <p className="text-xs sm:text-sm uppercase tracking-[0.32em] text-smoke">
+            <Reveal className="mb-10 sm:mb-14 flex items-end justify-between gap-6">
+              <p className="text-xs sm:text-sm uppercase tracking-widest text-smoke">
                 The Community
               </p>
               <a
@@ -204,18 +204,18 @@ export default function Home() {
             </Reveal>
 
             <Reveal delay={100}>
-              <div className="grid grid-cols-2 md:grid-cols-12 auto-rows-[12rem] sm:auto-rows-[14rem] md:auto-rows-[16rem] gap-2 sm:gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
                 {PHOTOS.map((p) => (
                   <div
                     key={p.src}
-                    className={`relative overflow-hidden bg-ash ${p.span} ${p.aspect} md:aspect-auto`}
+                    className="relative aspect-square overflow-hidden bg-ash"
                   >
                     <Image
                       src={p.src}
                       alt={p.alt}
                       fill
-                      sizes="(max-width: 768px) 50vw, 33vw"
-                      className="object-cover"
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      className="object-cover object-center"
                     />
                   </div>
                 ))}
