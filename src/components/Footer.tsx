@@ -16,7 +16,9 @@ export default function Footer() {
               alt="StreetLights"
               width={72}
               height={72}
-              className="h-16 w-16 sm:h-20 sm:w-20 object-contain"
+              // Same trick as the nav logo — `screen` blends the JPG's baked
+              // black background to transparent against the night-colored footer.
+              className="h-16 w-16 sm:h-20 sm:w-20 object-contain mix-blend-screen"
             />
           </Link>
 

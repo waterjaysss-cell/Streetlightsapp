@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useMagnetic } from "@/hooks/useMagnetic";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -13,9 +14,23 @@ const NAV_LINKS = [
   { label: "Connect", href: "/connect" },
 ];
 
+function DesktopNavLink({ label, href }: { label: string; href: string }) {
+  const ref = useMagnetic<HTMLAnchorElement>();
+  return (
+    <Link
+      ref={ref}
+      href={href}
+      className="text-sm uppercase tracking-[0.18em] text-bone/80 hover:text-bone transition-colors will-change-transform"
+    >
+      {label}
+    </Link>
+  );
+}
+
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const logoRef = useMagnetic<HTMLAnchorElement>();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -43,9 +58,10 @@ export default function Nav() {
       >
         <div className="mx-auto flex max-w-[1600px] items-center justify-between px-5 sm:px-8 lg:px-12 h-16 sm:h-20">
           <Link
+            ref={logoRef}
             href="/"
             aria-label="StreetLights — back to top"
-            className="block"
+            className="block will-change-transform"
             onClick={() => setOpen(false)}
           >
             <Image
@@ -54,19 +70,16 @@ export default function Nav() {
               width={44}
               height={44}
               priority
-              className="h-9 w-9 sm:h-11 sm:w-11 object-contain"
+              // The brand asset is a JPG with a baked-in dark background.
+              // `screen` blends pure black to fully transparent, so only the
+              // white mark shows over the (transparent or night-tinted) nav.
+              className="h-10 w-10 sm:h-12 sm:w-12 object-contain mix-blend-screen"
             />
           </Link>
 
           <nav className="hidden md:flex items-center gap-6 lg:gap-8">
             {NAV_LINKS.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="text-sm uppercase tracking-[0.18em] text-bone/80 hover:text-bone transition-colors"
-              >
-                {l.label}
-              </Link>
+              <DesktopNavLink key={l.href} href={l.href} label={l.label} />
             ))}
           </nav>
 

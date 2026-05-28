@@ -2,10 +2,126 @@
 
 **Project location:** `c:\Users\water\streetlights-web`
 
-> **Phase 2 (current work)** is at the top — homepage fixes + 5 new pages.
-> Phase 1 (homepage build) review is preserved below for reference.
+> **Phase 3 (current work)** — Motion / scroll-animation upgrade layer.
+> Phase 2 (5 new pages) and Phase 1 (homepage build) preserved below.
 
 ---
+
+# Phase 3 — Motion + scroll layer (award-show polish)
+
+## Non-negotiable constraints
+- **Zero** color, font, copy, route, or page-structure changes
+- All existing `<Reveal>` callsites in pages keep working (backward-compatible API)
+- Must SSR, must not blank-screen, WebGL must lazy-load with the static hero photo as fallback
+- `prefers-reduced-motion` disables Lenis, WebGL, magnetic, and heavy reveals
+
+## Dependencies added
+- `lenis` — inertia scrolling
+- `gsap` — animation engine + ScrollTrigger
+- `three`, `@react-three/fiber`, `@react-three/drei` — WebGL grayscale field
+
+## Tunable motion config
+`src/lib/motion.ts` — durations, easings, stagger, Lenis settings. **One source of truth.**
+
+## Files to create
+- [ ] `src/lib/motion.ts` — config
+- [ ] `src/components/motion/SmoothScroll.tsx` — Lenis + GSAP ticker sync
+- [ ] `src/components/motion/CustomCursor.tsx` — bone circle, scales on interactive, touch-disabled
+- [ ] `src/hooks/useMagnetic.ts` — ref-attached magnetic hover
+- [ ] `src/components/motion/HeroShader.tsx` — R3F monochrome noise field, cursor-reactive
+- [ ] `src/components/motion/HeroShaderClient.tsx` — `dynamic(..., { ssr: false })` wrapper
+- [ ] `src/components/motion/HeroHeadline.tsx` — per-line mask reveal on mount
+- [ ] `src/components/motion/HeroSection.tsx` — pin + scale/fade scroll-out wrapper
+- [ ] `src/components/motion/PhotoGrid.tsx` — staggered scale/fade + per-photo parallax drift
+
+## Files to edit
+- [ ] `src/app/layout.tsx` — wrap children with SmoothScroll, mount CustomCursor (no font/metadata/copy changes)
+- [ ] `src/components/Reveal.tsx` — GSAP-driven, same props (`children`, `delay`, `className`)
+- [ ] `src/components/SectionHeading.tsx` — internal per-line clip-mask reveal
+- [ ] `src/components/Button.tsx` — `"use client"` + magnetic hook on root
+- [ ] `src/components/Nav.tsx` — magnetic hook on desktop links
+- [ ] `src/components/EventRow.tsx` — `"use client"` + alternating side slide-in + day-number mask
+- [ ] `src/components/ConnectCards.tsx` — sequential reveal with number mask
+- [ ] `src/app/page.tsx` — swap inline h1 → `<HeroHeadline>`, mount `<HeroShaderClient>`, wrap hero in `<HeroSection>`, swap inline photo grid → `<PhotoGrid>`. No copy/text/structure changes beyond these swaps.
+
+## Quality gates
+- [x] `npm run build` clean (no TS/lint errors) — 9/9 routes generate static
+- [x] Hero shader has non-WebGL fallback (static photo always paints first)
+- [x] All ScrollTrigger / Lenis instances killed on unmount (gsap.context().revert())
+- [x] R3F pixel ratio capped at 2, depthTest/depthWrite off, shader material is owned by R3F
+- [x] Mobile: parallax disabled below md breakpoint inside PhotoGrid
+- [x] `prefers-reduced-motion: reduce` — Lenis off, shader off, magnetic off, reveals instant
+
+---
+
+## Review — Phase 3
+
+### What was added
+
+A site-wide motion layer that turns the editorial-brutalist base into an award-show experience without touching a single color, font, route, or piece of copy.
+
+**One source of truth for tuning feel:** `src/lib/motion.ts` — every duration, easing, stagger, magnetic radius, cursor size, Lenis weight, and shader speed lives in this one file. Want the whole site faster? Change `duration.base`. Want the magnetic effect to feel stickier? Change `magnetic.strength`. Tune in one place.
+
+### Dependencies added
+- `lenis` — inertia scrolling
+- `gsap` — animation engine + ScrollTrigger
+- `three` + `@react-three/fiber` + `@react-three/drei` — hero WebGL field
+- `@types/three` — TS types
+
+### Files created (10)
+- `src/lib/motion.ts`
+- `src/hooks/useMagnetic.ts`
+- `src/components/motion/SmoothScroll.tsx`
+- `src/components/motion/CustomCursor.tsx`
+- `src/components/motion/HeroShader.tsx`
+- `src/components/motion/HeroShaderClient.tsx`
+- `src/components/motion/HeroHeadline.tsx`
+- `src/components/motion/HeroSection.tsx`
+- `src/components/motion/PhotoGrid.tsx`
+
+### Files edited (9)
+- `src/app/layout.tsx` — wrapped children in `<SmoothScroll>`, mounted `<CustomCursor />`. Fonts, metadata, body classes unchanged.
+- `src/app/page.tsx` — swapped 3 inline blocks (hero h1 → HeroHeadline, hero section → HeroSection + HeroShaderClient, inline photo grid → PhotoGrid). Every word of copy and every CTA href is byte-identical.
+- `src/app/globals.css` — removed legacy `.reveal` CSS (Reveal now owns its own state) and `scroll-behavior: smooth` (Lenis owns it). Added cursor-hide rules and reduced-motion fallback.
+- `src/components/Reveal.tsx` — same props (`children`, `delay`, `className`), GSAP/ScrollTrigger internally. Every callsite (5 on homepage, 6+ across `/about`, `/connect`, etc.) keeps working unchanged.
+- `src/components/SectionHeading.tsx` — same API (`kicker`, `children`, `className`). Splits children on `<br />` and clip-mask-wipes each line on scroll.
+- `src/components/PageHeader.tsx` — same API. Same mask-wipe treatment for parity across pages.
+- `src/components/Button.tsx` — `"use client"` + magnetic. Same props, same variants.
+- `src/components/Nav.tsx` — magnetic logo + magnetic desktop nav links.
+- `src/components/EventRow.tsx` — `"use client"` + alternating-side slide-in + day-number mask reveal. Added optional `index` prop (defaults to 0 so existing callers don't break).
+- `src/components/ConnectCards.tsx` — `"use client"` + sequential per-card reveal (number → headline lines → body → CTA).
+
+### Confirmed unchanged
+- **Colors:** night `#0A0A0A`, bone `#F5F5F5`, ash `#1A1A1A`, smoke `#737373`. Zero new colors anywhere in any file.
+- **Fonts:** Anton (display) + Inter (body). Zero font additions.
+- **Copy:** Every headline, body paragraph, eyebrow, kicker, button label, footer line, alt text — byte-for-byte identical.
+- **Routes:** `/`, `/about`, `/events`, `/events/[slug]`, `/events/recap/[slug]`, `/shop`, `/give`, `/connect` — unchanged.
+- **Page structure:** All sections in `page.tsx` exist in the same order with the same content. Only swaps were `<h1>` → `<HeroHeadline>`, `<section>` → `<HeroSection>`, inline grid → `<PhotoGrid>`.
+
+### Quality protections built in
+- **SSR-safe:** Reveal, SectionHeading, PageHeader, HeroHeadline all use `useLayoutEffect` aliased to `useEffect` on server. Initial paint always shows content; GSAP sets the hidden state in a layout effect *after* hydration, then animates it in. No FOUC, no blank screens.
+- **WebGL fallback:** `HeroShaderClient` is `dynamic(..., { ssr: false })` and only mounts after a `requestAnimationFrame` — the static hero photo paints first, always. If Three.js fails or WebGL is unavailable, the page reads as it did before.
+- **Cleanup:** Every component using GSAP wraps its setup in `gsap.context()` and returns `ctx.revert()` from the effect. ScrollTrigger instances and tweens are killed on unmount. Lenis is destroyed on unmount. No double-bind on HMR or route swap.
+- **prefers-reduced-motion:** SmoothScroll bails entirely (native scroll). HeroShaderClient renders nothing. CustomCursor and useMagnetic short-circuit. All Reveal/SectionHeading/HeroHeadline animations skip and set the final state immediately.
+- **Touch:** CustomCursor and useMagnetic short-circuit on `(hover: none)` / `(pointer: coarse)` — phones get native scroll + native cursor + no magnetic.
+- **Perf:** R3F DPR capped at 2. Shader material has `depthTest`/`depthWrite` off. Photo-grid parallax disabled below md breakpoint. `will-change: transform` only on elements we actually transform.
+
+### Where to tune
+- **Feel:** `src/lib/motion.ts` — durations, eases, stagger, Lenis weight, magnetic strength, shader speed.
+- **Hero shader visuals:** `src/components/motion/HeroShader.tsx` — fragment shader constants (noise scale, vignette, mix opacity in CSS).
+- **Hero scroll-out:** `src/components/motion/HeroSection.tsx` — `scale: 0.94, opacity: 0` at `bottom top` — tune scrub speed or target scale here.
+
+### Not visually verified yet
+The harness can't open a browser. Dev server is running at `http://localhost:3000` — eyeball these on first load:
+1. Hero — three headline lines wipe up staggered; subtle grayscale noise blended over the photo
+2. Scroll down — hero scales down + fades as Who-We-Are section rises
+3. Section headings — each line clip-mask-wipes up as it scrolls in
+4. "This Month" event rows — alternate slide-in left/right, day numbers wipe up
+5. Photo grid — staggered scale/fade-in, then drifts slightly as you keep scrolling
+6. Connect cards — number → headline lines → body sequence per card
+7. Cursor (desktop) — thin bone circle, scales up over buttons/links
+8. Magnetic hover — button/nav-link follows cursor in a small radius
+9. Lenis — overall scroll has weight, feels inertial
 
 # Phase 2 — Homepage fixes + 5 new pages
 

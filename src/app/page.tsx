@@ -6,10 +6,20 @@ import SectionHeading from "@/components/SectionHeading";
 import EventRow from "@/components/EventRow";
 import Reveal from "@/components/Reveal";
 import ConnectCards from "@/components/ConnectCards";
+import HeroSection from "@/components/motion/HeroSection";
+import HeroHeadline from "@/components/motion/HeroHeadline";
+import HeroShaderClient from "@/components/motion/HeroShaderClient";
+import PhotoGrid from "@/components/motion/PhotoGrid";
 
 // TODO: replace with real GroupMe invite URL
 const GROUPME_URL = "https://groupme.com/join_group/107504026/haDaHAWT";
 const INSTAGRAM_URL = "https://instagram.com/streetlightscommunity";
+
+const HERO_LINES = [
+  "Everyday Fellowship.",
+  "Everyday Outreach.",
+  "Everyday Encouragement.",
+] as const;
 
 // TODO: replace placeholder events with real schedule
 const EVENTS = [
@@ -44,7 +54,7 @@ export default function Home() {
             sized to fit "EVERYDAY ENCOURAGEMENT." (longest line) inside
             the container at every width from 320px to 1920px+.
             ============================================================ */}
-        <section className="relative min-h-screen w-full overflow-hidden flex items-center pt-24 sm:pt-28 pb-20 sm:pb-24">
+        <HeroSection className="relative min-h-screen w-full overflow-hidden flex items-center pt-24 sm:pt-28 pb-20 sm:pb-24">
           <Image
             src="/photos/hero-speaking.png"
             alt=""
@@ -53,28 +63,34 @@ export default function Home() {
             sizes="100vw"
             className="object-cover object-center"
           />
+
+          {/* Grayscale noise shader — film-grain atmosphere over the photo.
+              Lazy-loaded with SSR off; renders nothing if reduced-motion is on. */}
+          <HeroShaderClient />
+
           {/* Dark wash so headline always reads */}
           <div
             aria-hidden
             className="absolute inset-0 bg-night/60"
+            style={{ zIndex: 2 }}
           />
           {/* Bottom-up gradient for headline legibility */}
           <div
             aria-hidden
             className="absolute inset-0 bg-gradient-to-t from-night via-night/70 to-night/20"
+            style={{ zIndex: 2 }}
           />
 
-          <div className="relative z-10 w-full mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
+          <div
+            data-hero-content
+            className="relative z-10 w-full mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12"
+          >
             {/* Location / time label — sits above the headline, in flow */}
             <p className="text-xs sm:text-sm uppercase tracking-widest text-bone/60 mb-5 sm:mb-7">
               Orlando, FL · Mondays at 6:45pm
             </p>
 
-            <h1 className="font-display uppercase leading-[0.88] tracking-tight text-bone text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl">
-              <span className="block">Everyday Fellowship.</span>
-              <span className="block">Everyday Outreach.</span>
-              <span className="block">Everyday Encouragement.</span>
-            </h1>
+            <HeroHeadline lines={HERO_LINES} />
 
             <p className="mt-6 sm:mt-8 text-xs sm:text-sm uppercase tracking-widest text-smoke">
               — Acts 2:42–47
@@ -96,13 +112,13 @@ export default function Home() {
           </div>
 
           {/* scroll indicator */}
-          <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-smoke">
+          <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-smoke z-10">
             <span className="text-[10px] uppercase tracking-widest">
               Scroll
             </span>
             <span className="block h-10 w-px bg-bone/30" />
           </div>
-        </section>
+        </HeroSection>
 
         {/* ============================================================
             WHO WE ARE
@@ -164,13 +180,14 @@ export default function Home() {
               </div>
 
               <div>
-                {EVENTS.map((e) => (
+                {EVENTS.map((e, i) => (
                   <EventRow
                     key={`${e.day}-${e.title}`}
                     day={e.day}
                     month={e.month}
                     title={e.title}
                     location={e.location}
+                    index={i}
                   />
                 ))}
                 {/* bottom divider */}
@@ -203,24 +220,7 @@ export default function Home() {
               </a>
             </Reveal>
 
-            <Reveal delay={100}>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
-                {PHOTOS.map((p) => (
-                  <div
-                    key={p.src}
-                    className="relative aspect-square overflow-hidden bg-ash"
-                  >
-                    <Image
-                      src={p.src}
-                      alt={p.alt}
-                      fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      className="object-cover object-center"
-                    />
-                  </div>
-                ))}
-              </div>
-            </Reveal>
+            <PhotoGrid photos={PHOTOS} />
           </div>
         </section>
 
