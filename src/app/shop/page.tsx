@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import Button from "@/components/Button";
 import Reveal from "@/components/Reveal";
+import TiltTile from "@/components/motion/TiltTile";
 
 export const metadata = {
   title: "Shop — StreetLights Community",
@@ -74,15 +74,11 @@ export default function ShopPage() {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-12 sm:gap-x-6 sm:gap-y-16">
                 {PRODUCTS.map((p) => (
                   <article key={p.slug} className="group flex flex-col">
-                    <div className="relative aspect-square bg-ash overflow-hidden">
-                      <Image
-                        src={`/photos/${p.slug}.jpg`}
-                        alt={p.alt}
-                        fill
-                        sizes="(max-width: 768px) 50vw, 33vw"
-                        className="object-cover transition-opacity duration-300 group-hover:opacity-90"
-                      />
-                    </div>
+                    <TiltTile
+                      src={`/photos/${p.slug}.jpg`}
+                      alt={p.alt}
+                      sizes="(max-width: 768px) 50vw, 33vw"
+                    />
 
                     <div className="mt-5 sm:mt-6 flex flex-col flex-1">
                       <h3 className="font-display text-2xl sm:text-3xl uppercase leading-[1.05] tracking-tight">
