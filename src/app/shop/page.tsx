@@ -6,7 +6,7 @@ import Reveal from "@/components/Reveal";
 import TiltTile from "@/components/motion/TiltTile";
 
 export const metadata = {
-  title: "Shop — StreetLights Community",
+  title: "Shop · StreetLights Community",
   description:
     "Limited drops. DM us on Instagram to grab one. All proceeds go back into the community.",
 };

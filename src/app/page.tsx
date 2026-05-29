@@ -10,6 +10,7 @@ import HeroSection from "@/components/motion/HeroSection";
 import HeroHeadline from "@/components/motion/HeroHeadline";
 import HeroShaderClient from "@/components/motion/HeroShaderClient";
 import PhotoGrid from "@/components/motion/PhotoGrid";
+import { SiInstagram } from "react-icons/si";
 
 // TODO: replace with real GroupMe invite URL
 const GROUPME_URL = "https://groupme.com/join_group/107504026/haDaHAWT";
@@ -33,7 +34,7 @@ const EVENTS = [
 // 8 community photos, uniform square grid. Alternates candid / collage for rhythm.
 const PHOTOS = [
   { src: "/photos/bonfire-night.png", alt: "Beach bonfire at night with the community" },
-  { src: "/photos/beach-trip.png", alt: "Beach trip — surfboards and spikeball" },
+  { src: "/photos/beach-trip.png", alt: "Beach trip with surfboards and spikeball" },
   { src: "/photos/bible-study-house.png", alt: "Bible study at the Streetlights House" },
   { src: "/photos/ucf-night.png", alt: "UCF night collage" },
   { src: "/photos/bible-study-1.png", alt: "Open Bibles during study" },
@@ -93,7 +94,7 @@ export default function Home() {
             <HeroHeadline lines={HERO_LINES} />
 
             <p className="mt-6 sm:mt-8 text-xs sm:text-sm uppercase tracking-widest text-smoke">
-              — Acts 2:42–47
+              Acts 2:42–47
             </p>
 
             <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -142,7 +143,7 @@ export default function Home() {
                 className="col-span-12 lg:col-span-6 lg:col-start-7 self-end"
               >
                 <p className="text-2xl sm:text-3xl lg:text-4xl leading-[1.25] tracking-tight text-bone/90 font-light">
-                  StreetLights is a community of young adults in Orlando —
+                  StreetLights is a community of young adults in Orlando,
                   people showing up for each other every day of the week.
                 </p>
                 <p className="mt-8 text-lg sm:text-xl leading-[1.5] text-bone/70">
@@ -195,7 +196,7 @@ export default function Home() {
               </div>
 
               <p className="mt-10 text-sm uppercase tracking-[0.22em] text-smoke">
-                Monday events start at 6:45 — Veterans Park unless noted.
+                Monday events start at 6:45, Veterans Park unless noted.
               </p>
             </Reveal>
           </div>
@@ -214,8 +215,9 @@ export default function Home() {
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs sm:text-sm uppercase tracking-[0.22em] text-bone/80 hover:text-bone transition-colors whitespace-nowrap"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm uppercase tracking-[0.22em] text-bone/80 hover:text-bone transition-colors whitespace-nowrap"
               >
+                <SiInstagram className="h-4 w-4" aria-hidden />
                 @streetlightscommunity ↗
               </a>
             </Reveal>

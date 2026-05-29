@@ -8,6 +8,7 @@ import {
 } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SiInstagram, SiGroupme } from "react-icons/si";
 import {
   duration,
   gsapEase,
@@ -169,7 +170,7 @@ export default function ConnectCards() {
             href="/#whats-on"
             className="text-sm uppercase tracking-[0.22em] text-bone/70 hover:text-bone transition-colors"
           >
-            Location varies — check What&apos;s On for this Monday&apos;s spot ↑
+            Location varies. Check What&apos;s On for this Monday&apos;s spot ↑
           </a>
         }
       />
@@ -178,14 +179,15 @@ export default function ConnectCards() {
         number="02"
         label="GroupMe"
         heading={<MaskedHeading lines={["Where it", "Happens"]} />}
-        body="This is where everything happens. Hangouts, last-minute beach trips, prayer requests, who's bringing the grill — all of it."
+        body="This is where everything happens. Hangouts, last-minute beach trips, prayer requests, who's bringing the grill. All of it."
         cta={
           <a
             href={GROUPME_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm uppercase tracking-[0.22em] text-bone hover:text-bone/70 transition-colors"
+            className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.22em] text-bone hover:text-bone/70 transition-colors"
           >
+            <SiGroupme className="h-4 w-4" aria-hidden />
             Join the GroupMe ↗
           </a>
         }
@@ -195,14 +197,15 @@ export default function ConnectCards() {
         number="03"
         label="Follow"
         heading={<MaskedHeading lines={["See What", "We're Up To"]} />}
-        body="Schedule drops, retreat recaps, worship nights, the whole picture — posted weekly on Instagram."
+        body="Schedule drops, retreat recaps, worship nights, the whole picture. Posted weekly on Instagram."
         cta={
           <a
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm uppercase tracking-[0.22em] text-bone hover:text-bone/70 transition-colors"
+            className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.22em] text-bone hover:text-bone/70 transition-colors"
           >
+            <SiInstagram className="h-4 w-4" aria-hidden />
             @streetlightscommunity ↗
           </a>
         }

@@ -23,9 +23,9 @@ const RECAPS: Record<string, Recap> = {
     intro:
       "Spikeball, soccer, hoops, the occasional dad-bod football game. We take over the park and run it 'til it's too dark to see the ball.",
     body: [
-      "It started small — a couple of us hauling a net to Veterans on a Tuesday. Now half the park belongs to us by 7pm: cleats, jerseys, the smell of grass and Gatorade.",
+      "It started small. A couple of us hauling a net to Veterans on a Tuesday. Now half the park belongs to us by 7pm: cleats, jerseys, the smell of grass and Gatorade.",
       "There's something about competing together that strips the walls down. You learn who your people are by who you trust to set the spike. Some of the strongest friendships in this community started in a pickup game nobody planned.",
-      "We rotate sports — never the same week twice. Bring shoes you don't mind getting beat up, and bring a friend.",
+      "We rotate sports. Never the same week twice. Bring shoes you don't mind getting beat up, and bring a friend.",
     ],
     photos: RECAP_PHOTOS["sports-nights"],
   },
@@ -36,7 +36,7 @@ const RECAPS: Record<string, Recap> = {
       "Charcoal, cheap meat, paper plates, and a hundred people who'd rather eat outside than anywhere else. The original StreetLights move.",
     body: [
       "Started as one grill. Then two. Now there's smoke from the moment we set up until the moment the sun's down.",
-      "Bring something to throw on — burgers, dogs, whatever. We figure out the rest. There's always too much food and never any leftovers.",
+      "Bring something to throw on: burgers, dogs, whatever. We figure out the rest. There's always too much food and never any leftovers.",
       "If you've never been, this is the easiest first visit. Show up, eat, meet people. That's it.",
     ],
     photos: RECAP_PHOTOS["grill-sesh"],
@@ -45,10 +45,10 @@ const RECAPS: Record<string, Recap> = {
     title: "Bible Studies",
     location: "Downtown Winter Garden",
     intro:
-      "Open Bibles, real questions, no script. Rotating spots in Downtown Winter Garden — porch lights, folding chairs, coffee.",
+      "Open Bibles, real questions, no script. Rotating spots in Downtown Winter Garden: porch lights, folding chairs, coffee.",
     body: [
       "We meet at one of a few homes around downtown. Whoever's leading picks a passage; the rest of us actually wrestle with it.",
-      "These aren't lectures. People interrupt. Questions don't get punted. If you've never opened a Bible before, you're in the right room — half of us hadn't either.",
+      "These aren't lectures. People interrupt. Questions don't get punted. If you've never opened a Bible before, you're in the right room. Half of us hadn't either.",
       "Bring a Bible if you have one. If not, we've got extras and the YouVersion app works fine.",
     ],
     photos: RECAP_PHOTOS["bible-studies"],
@@ -59,9 +59,9 @@ const RECAPS: Record<string, Recap> = {
     intro:
       "Acoustic guitars, a couple hundred voices, a stretch of sidewalk in Downtown Winter Garden. Candles, scripture, harmonies that mostly land.",
     body: [
-      "Once a month we set up in the heart of downtown after the shops close. No stage, no production. Just the songs we sing on a normal Monday — louder, longer, outside.",
+      "Once a month we set up in the heart of downtown after the shops close. No stage, no production. Just the songs we sing on a normal Monday, louder, longer, outside.",
       "Locals stop in. Some sing. Some just sit. Half the time we end up in conversation with strangers about what we believe and why.",
-      "Bring a friend. Bring a chair. Bring nothing — that works too.",
+      "Bring a friend. Bring a chair. Bring nothing. That works too.",
     ],
     photos: RECAP_PHOTOS["worship-nights"],
   },

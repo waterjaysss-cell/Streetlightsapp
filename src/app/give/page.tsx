@@ -8,7 +8,7 @@ import CopyButton from "@/components/CopyButton";
 import Reveal from "@/components/Reveal";
 
 export const metadata = {
-  title: "Give — StreetLights Community",
+  title: "Give · StreetLights Community",
   description:
     "Donations fund retreats, scholarships, and the everyday costs of community life.",
 };
@@ -44,7 +44,7 @@ export default function GivePage() {
                   <p>
                     Retreats, scholarships for anyone who can&apos;t cover the cost,
                     grills and food for hangouts, supplies for evangelism nights,
-                    rent on the Streetlights House — the boring necessary stuff
+                    rent on the Streetlights House, the boring necessary stuff
                     that keeps everything else running.
                   </p>
                   <p className="text-bone/70 text-lg sm:text-xl">

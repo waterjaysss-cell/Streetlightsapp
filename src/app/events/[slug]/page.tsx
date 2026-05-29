@@ -26,7 +26,7 @@ const DETAILS: Record<string, EventDetail> = {
     location: "Downtown Wintergarden",
     bring: ["A friend", "Bible (or pull it up on your phone)", "Folding chair if you've got one"],
     blurb:
-      "Once a month we trade the usual format for a worship night downtown. Acoustic, outdoors, and loud enough that strangers wander over to see what's happening — which is the whole point.",
+      "Once a month we trade the usual format for a worship night downtown. Acoustic, outdoors, and loud enough that strangers wander over to see what's happening (which is the whole point).",
   },
 };
 
@@ -114,7 +114,7 @@ export default async function EventDetailPage({
                             key={b}
                             className="flex items-baseline gap-4 text-lg sm:text-xl text-bone/85"
                           >
-                            <span className="font-display text-bone/40 text-base">—</span>
+                            <span className="font-display text-bone/40 text-base">·</span>
                             <span>{b}</span>
                           </li>
                         ))}
@@ -144,7 +144,7 @@ export default async function EventDetailPage({
                   </div>
                 )}
                 <p className="text-xl sm:text-2xl leading-[1.4] text-bone/75 font-light max-w-2xl">
-                  Detail page coming soon. For now — pull up Monday at 6:45,
+                  Detail page coming soon. For now, pull up Monday at 6:45,
                   bring a friend.
                 </p>
               </Reveal>

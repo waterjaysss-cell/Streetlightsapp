@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SiInstagram, SiGroupme } from "react-icons/si";
 
 // TODO: replace with real GroupMe invite URL
 const GROUPME_URL = "https://groupme.com/join_group/107504026/haDaHAWT";
@@ -22,29 +23,31 @@ export default function Footer() {
             />
           </Link>
 
-          <div className="flex flex-col gap-3 md:items-end">
+          <div className="flex items-center gap-6 md:self-end text-bone/80">
             <Link
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm uppercase tracking-[0.18em] text-bone/80 hover:text-bone transition-colors"
+              aria-label="StreetLights on Instagram"
+              className="hover:text-bone transition-colors"
             >
-              Instagram — @streetlightscommunity
+              <SiInstagram className="h-6 w-6" aria-hidden />
             </Link>
             <Link
               href={GROUPME_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm uppercase tracking-[0.18em] text-bone/80 hover:text-bone transition-colors"
+              aria-label="Join the StreetLights GroupMe"
+              className="hover:text-bone transition-colors"
             >
-              GroupMe
+              <SiGroupme className="h-6 w-6" aria-hidden />
             </Link>
           </div>
         </div>
 
         <div className="mt-12 flex flex-col gap-2 text-xs text-smoke sm:flex-row sm:items-center sm:justify-between">
           <p className="uppercase tracking-[0.18em]">
-            Acts 2:42–47 — Orlando, FL
+            Acts 2:42–47 · Orlando, FL
           </p>
           <p className="uppercase tracking-[0.18em]">
             © {new Date().getFullYear()} StreetLights Community

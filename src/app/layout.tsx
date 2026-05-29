@@ -19,7 +19,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "StreetLights Community",
   description:
-    "Everyday fellowship. Everyday outreach. Everyday encouragement. A young adult community in Orlando, FL — Mondays at 6:45pm.",
+    "Everyday fellowship. Everyday outreach. Everyday encouragement. A young adult community in Orlando, FL. Mondays at 6:45pm.",
   openGraph: {
     title: "StreetLights Community",
     description:

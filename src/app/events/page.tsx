@@ -10,7 +10,7 @@ import Reveal from "@/components/Reveal";
 import { RECAP_PHOTOS } from "@/lib/recap-photos";
 
 export const metadata = {
-  title: "Events — StreetLights Community",
+  title: "Events · StreetLights Community",
   description: "Upcoming events and recaps from StreetLights Community.",
 };
 
@@ -50,7 +50,7 @@ const RECAPS: RecapCard[] = [
     title: "Grill Sesh",
     location: "Veterans Park",
     summary:
-      "Charcoal, cheap meat, paper plates. The original StreetLights move — show up, eat, meet people.",
+      "Charcoal, cheap meat, paper plates. The original StreetLights move. Show up, eat, meet people.",
   },
   {
     // Photo grid pulls from RECAP_PHOTOS["bible-studies"] (shared with the
@@ -60,7 +60,7 @@ const RECAPS: RecapCard[] = [
     title: "Bible Studies",
     location: "Downtown Winter Garden",
     summary:
-      "Open Bibles, real questions, no script. Rotating spots downtown — porch lights, folding chairs, coffee.",
+      "Open Bibles, real questions, no script. Rotating spots downtown: porch lights, folding chairs, coffee.",
   },
   {
     slug: "worship-nights",
@@ -117,7 +117,7 @@ export default function EventsPage() {
               </div>
 
               <p className="mt-10 text-sm uppercase tracking-[0.22em] text-smoke">
-                Monday events start at 6:45 — Veterans Park unless noted.
+                Monday events start at 6:45, Veterans Park unless noted.
               </p>
             </Reveal>
           </div>

@@ -7,16 +7,16 @@ import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 
 export const metadata = {
-  title: "About — StreetLights Community",
+  title: "About · StreetLights Community",
   description:
-    "A young adult community in Orlando, FL — a community, not a service.",
+    "A young adult community in Orlando, FL. A community, not a service.",
 };
 
 const PILLARS = [
   {
     n: "01",
     title: "Fellowship",
-    body: "We don't just meet on Mondays. We do life together — meals, hangouts, study sessions, the messy stuff in between.",
+    body: "We don't just meet on Mondays. We do life together: meals, hangouts, study sessions, the messy stuff in between.",
   },
   {
     n: "02",
@@ -63,11 +63,11 @@ export default function AboutPage() {
                   <p>
                     Mondays we gather. The rest of the week we eat together, hoop
                     together, study scripture together, and chase down the city.
-                    Orlando-anchored but open to anyone — students, post-grads,
+                    Orlando-anchored but open to anyone: students, post-grads,
                     working in the city, just visiting. Whoever finds us.
                   </p>
                   <p className="text-bone/70 text-lg sm:text-xl">
-                    We&apos;re after the real thing — the everyday discipleship Acts 2
+                    We&apos;re after the real thing: the everyday discipleship Acts 2
                     talks about. Not a stage. Not a brand. People.
                   </p>
                 </div>
