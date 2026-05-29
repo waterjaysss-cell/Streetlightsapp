@@ -9,7 +9,7 @@ import Reveal from "@/components/Reveal";
 export const metadata = {
   title: "About — StreetLights Community",
   description:
-    "A college community in Orlando, FL — a community, not a service.",
+    "A young adult community in Orlando, FL — a community, not a service.",
 };
 
 const PILLARS = [
@@ -55,16 +55,16 @@ export default function AboutPage() {
               <Reveal delay={120} className="col-span-12 lg:col-span-8">
                 <div className="space-y-7 text-xl sm:text-2xl lg:text-3xl leading-[1.35] text-bone/90 font-light">
                   <p>
-                    StreetLights started simple: a handful of college students in
+                    StreetLights started simple: a handful of young adults in
                     Orlando who didn&apos;t want church to be a once-a-week thing.
-                    Today it&apos;s ~350+ students who show up for each other every
+                    Today it&apos;s ~350+ people who show up for each other every
                     day of the week.
                   </p>
                   <p>
                     Mondays we gather. The rest of the week we eat together, hoop
                     together, study scripture together, and chase down the city.
-                    UCF-anchored but open to anyone — Valencia, Rollins, FCC,
-                    whoever finds us.
+                    Orlando-anchored but open to anyone — students, post-grads,
+                    working in the city, just visiting. Whoever finds us.
                   </p>
                   <p className="text-bone/70 text-lg sm:text-xl">
                     We&apos;re after the real thing — the everyday discipleship Acts 2

@@ -66,7 +66,7 @@ function ConnectCard({
         scrollTrigger: {
           trigger: card,
           start: "top 85%",
-          once: true,
+          toggleActions: "play none none none",
         },
       });
 

@@ -61,7 +61,7 @@ export default function EventRow({
         scrollTrigger: {
           trigger: row,
           start: "top 88%",
-          once: true,
+          toggleActions: "play none none none",
         },
       });
 

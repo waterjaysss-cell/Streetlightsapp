@@ -1,5 +1,4 @@
-// TODO: copy review — placeholder products, swap with real drops when ready
-
+import Image from "next/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
@@ -14,38 +13,43 @@ export const metadata = {
 
 const INSTAGRAM_URL = "https://instagram.com/streetlightscommunity";
 
-// TODO: replace with real products and drop photos at /photos/shop/
+// Product photos live at /photos/{slug}.jpg
 type Product = {
   slug: string;
   name: string;
   price: string;
   sizes: string;
+  alt: string;
 };
 
 const PRODUCTS: Product[] = [
   {
     slug: "black-tee",
-    name: "StreetLights Black Tee",
+    name: "StreetLights Tee",
     price: "$25",
     sizes: "S / M / L / XL",
-  },
-  {
-    slug: "white-tee",
-    name: "Logo Mark White Tee",
-    price: "$25",
-    sizes: "S / M / L / XL",
+    alt: "StreetLights black tee, front view",
   },
   {
     slug: "black-hoodie",
-    name: "Heavyweight Hoodie",
+    name: "StreetLights Hoodie",
     price: "$50",
     sizes: "S / M / L / XL",
+    alt: "StreetLights black hoodie, front view",
   },
   {
-    slug: "trucker",
-    name: "Streetlights Trucker",
+    slug: "black-trucker",
+    name: "Black Rope Trucker",
     price: "$30",
     sizes: "One Size",
+    alt: "Black rope trucker hat with StreetLights mark",
+  },
+  {
+    slug: "blue-trucker",
+    name: "Sky Rope Trucker",
+    price: "$30",
+    sizes: "One Size",
+    alt: "Sky blue rope trucker hat with StreetLights mark",
   },
 ];
 
@@ -70,19 +74,14 @@ export default function ShopPage() {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-12 sm:gap-x-6 sm:gap-y-16">
                 {PRODUCTS.map((p) => (
                   <article key={p.slug} className="group flex flex-col">
-                    {/* TODO: drop product photo at /photos/shop/{slug}.jpg and swap to <Image> */}
                     <div className="relative aspect-square bg-ash overflow-hidden">
-                      <div
-                        aria-hidden
-                        className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-90"
-                        style={{
-                          backgroundImage:
-                            "radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.04), transparent 60%)",
-                        }}
+                      <Image
+                        src={`/photos/${p.slug}.jpg`}
+                        alt={p.alt}
+                        fill
+                        sizes="(max-width: 768px) 50vw, 33vw"
+                        className="object-cover transition-opacity duration-300 group-hover:opacity-90"
                       />
-                      <span className="absolute bottom-3 left-3 text-[10px] uppercase tracking-widest text-smoke">
-                        Photo / {p.slug}
-                      </span>
                     </div>
 
                     <div className="mt-5 sm:mt-6 flex flex-col flex-1">

@@ -135,11 +135,11 @@ export default function ConnectPage() {
                 </p>
               </FAQItem>
 
-              <FAQItem question="Do I have to be a UCF student to come?">
+              <FAQItem question="Do I have to be in college to come?">
                 <p>
-                  Not at all. We&apos;re UCF-anchored but anyone college-aged is
-                  welcome — Valencia, Rollins, FCC, students from out of state,
-                  recent grads. If you&apos;re finding us, you&apos;re invited.
+                  Not at all. UCF is where this started, but the community&apos;s
+                  wider than that — students, post-grads, working in Orlando,
+                  just visiting. If you&apos;re finding us, you&apos;re invited.
                 </p>
               </FAQItem>
 

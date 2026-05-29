@@ -1,53 +1,73 @@
 // TODO: copy review — placeholder schedule, swap with real upcoming events when ready
 
+import Image from "next/image";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import EventRow from "@/components/EventRow";
 import Reveal from "@/components/Reveal";
+import { RECAP_PHOTOS } from "@/lib/recap-photos";
 
 export const metadata = {
   title: "Events — StreetLights Community",
   description: "Upcoming events and recaps from StreetLights Community.",
 };
 
-const UPCOMING_MONTH = { month: "MAY", year: "2026" };
+const UPCOMING_MONTH = { month: "JUNE", year: "2026" };
 
-// TODO: replace with real upcoming events
+// Real June 2026 schedule — all Mondays, doors at 6:45pm.
 const UPCOMING = [
-  { slug: "grill-sesh", day: "04", month: "MAY", title: "Grill Sesh", location: "Veterans Park" },
-  { slug: "sports-night", day: "11", month: "MAY", title: "Sports Night", location: "Veterans Park" },
-  { slug: "bible-study", day: "18", month: "MAY", title: "Bible Study", location: "Streetlights House" },
-  { slug: "worship-night", day: "25", month: "MAY", title: "Worship Night", location: "Downtown Wintergarden" },
-  { slug: "spikeball-tourney", day: "30", month: "MAY", title: "Spikeball Tourney", location: "Veterans Park" },
+  { day: "01", month: "JUNE", title: "Sports Hangout", location: "Veterans Park" },
+  { day: "08", month: "JUNE", title: "Grill Sesh", location: "Veterans Park" },
+  { day: "15", month: "JUNE", title: "Evangelism Night", location: "Downtown Orlando" },
+  { day: "22", month: "JUNE", title: "Putt for a Purpose", location: "Hamlin Popstroke" },
+  { day: "29", month: "JUNE", title: "Worship Night", location: "Streetlights House" },
 ];
 
-// Past events drawn from real April / March 2026 schedules
-const RECAPS = [
+// Recurring activities (not one-off dated events) — location stands in for date.
+// `preview` is optional — when set, the card shows that image full-bleed;
+// when omitted, the card falls back to the gray-ash placeholder grid.
+type RecapCard = {
+  slug: string;
+  title: string;
+  location: string;
+  summary: string;
+  preview?: string;
+  previewAlt?: string;
+};
+
+const RECAPS: RecapCard[] = [
   {
-    slug: "q2-retreat",
-    title: "Q2 Retreat",
-    when: "April 4 · 2026",
-    summary: "A weekend in Daytona Beach. Bonfire on the sand, scripture under the stars, 60+ students.",
+    slug: "sports-nights",
+    title: "Sports Nights",
+    location: "Veterans Park",
+    summary:
+      "Spikeball, soccer, hoops, the occasional dad-bod football game. We take over the park and run it 'til it's too dark to see the ball.",
   },
   {
-    slug: "evangelism-april",
-    title: "Evangelism — Downtown Orlando",
-    when: "April 13 · 2026",
-    summary: "Teaming up with The Spot to share the gospel downtown. Conversations, prayer, late-night tacos.",
+    slug: "grill-sesh",
+    title: "Grill Sesh",
+    location: "Veterans Park",
+    summary:
+      "Charcoal, cheap meat, paper plates. The original StreetLights move — show up, eat, meet people.",
   },
   {
-    slug: "ucf-hangout",
-    title: "UCF Hangout",
-    when: "April 27 · 2026",
-    summary: "Memory Mall takeover — pickleball, spikeball, and a few hundred students figuring out who StreetLights is.",
+    // Photo grid pulls from RECAP_PHOTOS["bible-studies"] (shared with the
+    // detail page). No `preview` field needed — having 5 photos triggers the
+    // mosaic layout below.
+    slug: "bible-studies",
+    title: "Bible Studies",
+    location: "Downtown Winter Garden",
+    summary:
+      "Open Bibles, real questions, no script. Rotating spots downtown — porch lights, folding chairs, coffee.",
   },
   {
-    slug: "prayer-walk",
-    title: "Prayer Walk — UCF Memory Mall",
-    when: "March 9 · 2026",
-    summary: "Walking campus and praying for students and staff by name. Quiet, serious, and good for the soul.",
+    slug: "worship-nights",
+    title: "Worship Nights",
+    location: "Downtown Winter Garden",
+    summary:
+      "Acoustic guitars, a couple hundred voices, a stretch of sidewalk downtown. Candles, scripture, harmonies that mostly land.",
   },
 ];
 
@@ -85,18 +105,13 @@ export default function EventsPage() {
 
               <div>
                 {UPCOMING.map((e) => (
-                  <Link
-                    key={e.slug}
-                    href={`/events/${e.slug}`}
-                    className="block group"
-                  >
-                    <EventRow
-                      day={e.day}
-                      month={e.month}
-                      title={e.title}
-                      location={e.location}
-                    />
-                  </Link>
+                  <EventRow
+                    key={`${e.day}-${e.title}`}
+                    day={e.day}
+                    month={e.month}
+                    title={e.title}
+                    location={e.location}
+                  />
                 ))}
                 <div className="border-t border-bone/15" />
               </div>
@@ -121,22 +136,69 @@ export default function EventsPage() {
             </Reveal>
 
             <div className="mt-16 sm:mt-24 grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12">
-              {RECAPS.map((r, i) => (
+              {RECAPS.map((r, i) => {
+                // Recaps with a full 5-photo set get the 1-tall + 2×2 mosaic.
+                // Sources from the shared RECAP_PHOTOS so the card and detail
+                // page stay in sync.
+                const photos = RECAP_PHOTOS[r.slug];
+                const hasFullSet = photos && photos.length >= 5;
+
+                return (
                 <Reveal key={r.slug} delay={i * 80}>
                   <Link
                     href={`/events/recap/${r.slug}`}
                     className="block group"
                   >
-                    {/* TODO: replace with real recap photo grid for /photos/recap/{slug}/ */}
-                    <div className="grid grid-cols-3 gap-1 aspect-[3/2] mb-6 transition-opacity group-hover:opacity-80">
-                      <div className="bg-ash row-span-2" />
-                      <div className="bg-ash" />
-                      <div className="bg-ash" />
-                      <div className="bg-ash" />
-                      <div className="bg-ash" />
-                    </div>
+                    {hasFullSet ? (
+                      // 3-col × 2-row grid: hero photo spans the left column
+                      // full height; remaining 4 photos fill a 2×2 on the right.
+                      <div className="grid grid-cols-3 grid-rows-2 gap-1 aspect-[3/2] mb-6 transition-opacity group-hover:opacity-80">
+                        <div className="relative col-span-1 row-span-2 overflow-hidden bg-ash">
+                          <Image
+                            src={photos[0].src}
+                            alt={photos[0].alt}
+                            fill
+                            sizes="(max-width: 768px) 33vw, 17vw"
+                            className="object-cover object-center"
+                          />
+                        </div>
+                        {photos.slice(1, 5).map((p) => (
+                          <div
+                            key={p.src}
+                            className="relative col-span-1 row-span-1 overflow-hidden bg-ash"
+                          >
+                            <Image
+                              src={p.src}
+                              alt={p.alt}
+                              fill
+                              sizes="(max-width: 768px) 33vw, 17vw"
+                              className="object-cover object-center"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ) : r.preview ? (
+                      <div className="relative aspect-[3/2] mb-6 overflow-hidden bg-ash transition-opacity group-hover:opacity-80">
+                        <Image
+                          src={r.preview}
+                          alt={r.previewAlt ?? r.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover object-center"
+                        />
+                      </div>
+                    ) : (
+                      // TODO: replace with real recap photo when available — add `preview` to the RECAP entry
+                      <div className="grid grid-cols-3 gap-1 aspect-[3/2] mb-6 transition-opacity group-hover:opacity-80">
+                        <div className="bg-ash row-span-2" />
+                        <div className="bg-ash" />
+                        <div className="bg-ash" />
+                        <div className="bg-ash" />
+                        <div className="bg-ash" />
+                      </div>
+                    )}
                     <p className="text-xs uppercase tracking-widest text-smoke mb-3">
-                      {r.when}
+                      {r.location}
                     </p>
                     <h3 className="font-display text-4xl sm:text-5xl md:text-6xl uppercase leading-[0.95] tracking-tight">
                       {r.title}
@@ -149,7 +211,8 @@ export default function EventsPage() {
                     </span>
                   </Link>
                 </Reveal>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>

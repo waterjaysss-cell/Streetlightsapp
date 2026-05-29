@@ -118,7 +118,7 @@ export default function SectionHeading({
         scrollTrigger: {
           trigger: root,
           start: "top 82%",
-          once: true,
+          toggleActions: "play none none none",
         },
       });
 

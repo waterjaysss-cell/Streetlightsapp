@@ -63,7 +63,7 @@ export default function PhotoGrid({ photos }: { photos: readonly Photo[] }) {
         scrollTrigger: {
           trigger: grid,
           start: "top 85%",
-          once: true,
+          toggleActions: "play none none none",
         },
       });
 

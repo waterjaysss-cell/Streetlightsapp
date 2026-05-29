@@ -21,13 +21,13 @@ const HERO_LINES = [
   "Everyday Encouragement.",
 ] as const;
 
-// TODO: replace placeholder events with real schedule
+// Real June 2026 schedule — all Mondays, doors at 6:45pm.
 const EVENTS = [
-  { day: "04", month: "MAY", title: "Grill Sesh", location: "Veterans Park" },
-  { day: "11", month: "MAY", title: "Sports Night", location: "Veterans Park" },
-  { day: "18", month: "MAY", title: "Bible Study", location: "Streetlights House" },
-  { day: "25", month: "MAY", title: "Worship Night", location: "Downtown Wintergarden" },
-  { day: "30", month: "MAY", title: "Spikeball Tourney", location: "Veterans Park" },
+  { day: "01", month: "JUNE", title: "Sports Hangout", location: "Veterans Park" },
+  { day: "08", month: "JUNE", title: "Grill Sesh", location: "Veterans Park" },
+  { day: "15", month: "JUNE", title: "Evangelism Night", location: "Downtown Orlando" },
+  { day: "22", month: "JUNE", title: "Putt for a Purpose", location: "Hamlin Popstroke" },
+  { day: "29", month: "JUNE", title: "Worship Night", location: "Streetlights House" },
 ];
 
 // 8 community photos, uniform square grid. Alternates candid / collage for rhythm.
@@ -38,7 +38,7 @@ const PHOTOS = [
   { src: "/photos/ucf-night.png", alt: "UCF night collage" },
   { src: "/photos/bible-study-1.png", alt: "Open Bibles during study" },
   { src: "/photos/worship-guitar.png", alt: "Worship night with guitar" },
-  { src: "/photos/beach-pair-1.png", alt: "Two students at the beach" },
+  { src: "/photos/beach-pair-1.png", alt: "Two young adults at the beach" },
   { src: "/photos/sunset-collage.png", alt: "Summer sunset hangout" },
 ];
 
@@ -142,8 +142,8 @@ export default function Home() {
                 className="col-span-12 lg:col-span-6 lg:col-start-7 self-end"
               >
                 <p className="text-2xl sm:text-3xl lg:text-4xl leading-[1.25] tracking-tight text-bone/90 font-light">
-                  StreetLights is a college community in Orlando — students
-                  showing up for each other every day of the week.
+                  StreetLights is a community of young adults in Orlando —
+                  people showing up for each other every day of the week.
                 </p>
                 <p className="mt-8 text-lg sm:text-xl leading-[1.5] text-bone/70">
                   Mondays we gather. The rest of the week we eat together,
@@ -171,7 +171,7 @@ export default function Home() {
               {/* Month / Year header — mirrors their IG schedule graphic */}
               <div className="flex items-center gap-6 sm:gap-10 pb-6 sm:pb-8 border-b border-bone/30">
                 <span className="font-display text-3xl sm:text-5xl uppercase tracking-tight">
-                  May
+                  June
                 </span>
                 <span className="flex-1 h-px bg-bone/30" />
                 <span className="font-display text-3xl sm:text-5xl uppercase tracking-tight">

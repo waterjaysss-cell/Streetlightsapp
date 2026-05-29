@@ -6,48 +6,64 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
-
-type Photo = { src: string; alt: string };
+import { RECAP_PHOTOS, type RecapPhoto } from "@/lib/recap-photos";
 
 type Recap = {
   title: string;
-  when: string;
+  location: string;
   intro: string;
   body: string[];
-  photos: Photo[];
+  photos: RecapPhoto[];
 };
 
 const RECAPS: Record<string, Recap> = {
-  "q2-retreat": {
-    title: "Q2 Retreat",
-    when: "April 4 · 2026 · Daytona Beach",
+  "sports-nights": {
+    title: "Sports Nights",
+    location: "Veterans Park",
     intro:
-      "60+ students. One weekend. A bonfire on the sand and a worship set that ran past midnight.",
+      "Spikeball, soccer, hoops, the occasional dad-bod football game. We take over the park and run it 'til it's too dark to see the ball.",
     body: [
-      "We rented a stretch of beach houses, ate too much, slept too little, and spent two days going hard after Jesus together. Mornings started with breakfast and quiet time. Afternoons were the ocean. Evenings were teaching, worship, and the kind of conversations you don't get on a normal Monday.",
-      "The bonfire on Saturday night is the moment most of us are still talking about. Guitars, scripture passed around, hands raised against the dark — the whole thing felt like something out of Acts. Several students put their faith in Christ. Others recommitted. We came home different.",
-      "Photos and video coming soon. If you missed it — we're already planning the next one.",
+      "It started small — a couple of us hauling a net to Veterans on a Tuesday. Now half the park belongs to us by 7pm: cleats, jerseys, the smell of grass and Gatorade.",
+      "There's something about competing together that strips the walls down. You learn who your people are by who you trust to set the spike. Some of the strongest friendships in this community started in a pickup game nobody planned.",
+      "We rotate sports — never the same week twice. Bring shoes you don't mind getting beat up, and bring a friend.",
     ],
-    photos: [
-      { src: "/photos/bonfire-night.png", alt: "Bonfire on the beach at night with the community" },
-      { src: "/photos/beach-pair-1.png", alt: "Two students at the beach" },
-      { src: "/photos/beach-pair-2.png", alt: "Two students at the beach" },
-      { src: "/photos/sunset-collage.png", alt: "Sunset hangout collage" },
-    ],
+    photos: RECAP_PHOTOS["sports-nights"],
   },
-  "evangelism-april": {
-    title: "Evangelism — Downtown Orlando",
-    when: "April 13 · 2026 · Downtown Orlando",
+  "grill-sesh": {
+    title: "Grill Sesh",
+    location: "Veterans Park",
     intro:
-      "We took a Sunday evening, partnered up with The Spot, and walked downtown with one job: share the gospel.",
+      "Charcoal, cheap meat, paper plates, and a hundred people who'd rather eat outside than anywhere else. The original StreetLights move.",
     body: [
-      "Forty-something of us split into pairs and spread out across Lake Eola and Church Street. The plan: meet people, listen, ask good questions, share Jesus when the door opens.",
-      "Some conversations were short. A few went over an hour. Two students prayed to receive Christ. We ended the night at a taco place comparing stories — what we'd been afraid of, what surprised us, where God showed up.",
+      "Started as one grill. Then two. Now there's smoke from the moment we set up until the moment the sun's down.",
+      "Bring something to throw on — burgers, dogs, whatever. We figure out the rest. There's always too much food and never any leftovers.",
+      "If you've never been, this is the easiest first visit. Show up, eat, meet people. That's it.",
     ],
-    photos: [
-      { src: "/photos/praying-bibles.png", alt: "Students praying outdoors with Bibles" },
-      { src: "/photos/worship-outdoor.png", alt: "Worship gathering at night" },
+    photos: RECAP_PHOTOS["grill-sesh"],
+  },
+  "bible-studies": {
+    title: "Bible Studies",
+    location: "Downtown Winter Garden",
+    intro:
+      "Open Bibles, real questions, no script. Rotating spots in Downtown Winter Garden — porch lights, folding chairs, coffee.",
+    body: [
+      "We meet at one of a few homes around downtown. Whoever's leading picks a passage; the rest of us actually wrestle with it.",
+      "These aren't lectures. People interrupt. Questions don't get punted. If you've never opened a Bible before, you're in the right room — half of us hadn't either.",
+      "Bring a Bible if you have one. If not, we've got extras and the YouVersion app works fine.",
     ],
+    photos: RECAP_PHOTOS["bible-studies"],
+  },
+  "worship-nights": {
+    title: "Worship Nights",
+    location: "Downtown Winter Garden",
+    intro:
+      "Acoustic guitars, a couple hundred voices, a stretch of sidewalk in Downtown Winter Garden. Candles, scripture, harmonies that mostly land.",
+    body: [
+      "Once a month we set up in the heart of downtown after the shops close. No stage, no production. Just the songs we sing on a normal Monday — louder, longer, outside.",
+      "Locals stop in. Some sing. Some just sit. Half the time we end up in conversation with strangers about what we believe and why.",
+      "Bring a friend. Bring a chair. Bring nothing — that works too.",
+    ],
+    photos: RECAP_PHOTOS["worship-nights"],
   },
 };
 
@@ -82,7 +98,7 @@ export default async function RecapDetailPage({
               <>
                 <Reveal delay={100} className="mt-10 sm:mt-14">
                   <p className="text-xs uppercase tracking-widest text-smoke">
-                    {recap.when}
+                    {recap.location}
                   </p>
                 </Reveal>
 

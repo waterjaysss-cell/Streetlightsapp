@@ -42,14 +42,14 @@ export default function GivePage() {
                     Every dollar goes back into the community.
                   </p>
                   <p>
-                    Retreats, scholarships for students who can&apos;t cover the cost,
+                    Retreats, scholarships for anyone who can&apos;t cover the cost,
                     grills and food for hangouts, supplies for evangelism nights,
                     rent on the Streetlights House — the boring necessary stuff
                     that keeps everything else running.
                   </p>
                   <p className="text-bone/70 text-lg sm:text-xl">
-                    No one on staff takes a salary from this. It&apos;s students
-                    funding students.
+                    No one on staff takes a salary from this. It&apos;s people
+                    funding people.
                   </p>
                 </div>
               </Reveal>
